@@ -1,3 +1,13 @@
 dishes.mov
 env
 dirtydishes_env
+*FastSAM.pt
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.idea
+weights
+build/
+*.egg-info/
+gradio_cached_examples
