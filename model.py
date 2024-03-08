@@ -19,15 +19,15 @@ def compute_segment(prompt_process : FastSAMPrompt):
 def main():
     DEVICE = "cpu"
     model = FastSAM("./FastSAM/FastSAM.pt")
-    IMAGE_PATH = "./FastSAM/images/imageForSegmentation.png"
+    IMAGE_PATH = "./FastSAM/images/imageForSegmentation.jpg"
 
     everything_results = model(IMAGE_PATH, device=DEVICE, retina_masks=True, imgsz=2872, conf=0.4, iou=0.9,)
     prompt_process = FastSAMPrompt(IMAGE_PATH, everything_results, device=DEVICE)
 
 
-    ann = compute_segment.remote(prompt_process)
+    ann = compute_segment.local(prompt_process)
 
-    prompt_process.plot(annotations=ann, output_path="./FastSAM/output/dishes_annotated.png")
+    prompt_process.plot(annotations=ann, output_path="./FastSAM/output/dishes_annotated.jpg")
 
     print("process completed")
 
